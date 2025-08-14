@@ -1,0 +1,23 @@
+# QuantumForge API
+
+- Auth
+  - POST /api/auth/register
+  - POST /api/auth/login
+  - GET /api/auth/profile
+  - PUT /api/auth/profile
+- Realms
+  - POST /api/realms/create (multipart: files[]; fields: name, description)
+  - GET /api/realms/:id
+- Collapse State
+  - POST /api/collapse-state { realmId, filepath, message }
+- Superposition
+  - POST /api/superposition/create { realmId, branchName }
+  - POST /api/superposition/compare { branches: string[] }
+- Collaboration
+  - POST /api/collaboration/join { realmId }
+- Mitigation
+  - POST /api/mitigation/analyze { commitId }
+- Search
+  - GET /api/search?q=term
+- History
+  - GET /api/history?realmId=ID

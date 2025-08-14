@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.glow-text {
+		text-shadow: 0 0 10px theme('colors.quantum.glow');
+	}
+}

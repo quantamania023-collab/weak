@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "quantumforge",
+  "builds": [
+    { "src": "client/package.json", "use": "@vercel/static-build", "config": { "distDir": "build" } }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "https://backend.example.com/api/$1" },
+    { "src": "/(.*)", "dest": "client/build/$1" }
+  ]
+}
