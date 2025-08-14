@@ -1,0 +1,42 @@
+# Node
+node_modules/
+.npm/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+.next/
+coverage/
+.cypress/
+
+# Env
+.env
+.env.local
+.env.test
+.env.production
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# Cypress artifacts
+cypress/screenshots/
+cypress/videos/
+
+# MongoDB
+/data/db/
+
+# Redis
+/dump.rdb
+
+# Repos storage
+/server/repos/
