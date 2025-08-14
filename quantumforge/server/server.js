@@ -60,8 +60,17 @@ io.on('connection', (socket) => {
 });
 
 async function connectMongo() {
-	const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/quantumforge';
+	const useMemory = process.env.USE_MEMORY_MONGO === 'true';
 	mongoose.set('strictQuery', true);
+	if (useMemory) {
+		const { MongoMemoryServer } = require('mongodb-memory-server');
+		const mongo = await MongoMemoryServer.create();
+		const uri = mongo.getUri();
+		await mongoose.connect(uri, { dbName: 'quantumforge' });
+		console.log('Connected to in-memory MongoDB');
+		return;
+	}
+	const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/quantumforge';
 	await mongoose.connect(mongoUri, { dbName: 'quantumforge' });
 	// Indexes can be ensured here
 }
