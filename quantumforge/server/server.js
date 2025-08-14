@@ -41,6 +41,16 @@ apiRouter.use('/mitigation', require('./api/mitigation'));
 apiRouter.use('/search', require('./api/search'));
 apiRouter.use('/history', require('./api/history'));
 
+// Serve client (built) when enabled
+if (process.env.SERVE_CLIENT === 'true') {
+	const clientDist = path.join(__dirname, '..', 'client', 'dist');
+	app.use(express.static(clientDist));
+	app.get('*', (req, res, next) => {
+		if (req.path.startsWith('/api')) return next();
+		return res.sendFile(path.join(clientDist, 'index.html'));
+	});
+}
+
 app.use(Sentry.Handlers.errorHandler());
 
 const server = http.createServer(app);
@@ -79,7 +89,7 @@ const PORT = process.env.PORT || 4000;
 
 connectMongo()
 	.then(() => {
-		server.listen(PORT, () => {
+		server.listen(PORT, '0.0.0.0', () => {
 			console.log(`QuantumForge server listening on :${PORT}`);
 		});
 	})
